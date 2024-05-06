@@ -1,0 +1,696 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Taxonomy of Recommenders</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="18943fd6-ce46-4cf6-ac75-f33d06550bf2" class="page sans"><header><h1 class="page-title">Taxonomy of Recommenders</h1><p class="page-description"></p></header><div class="page-body"><p id="ce94e71b-f234-4ff5-befd-b25b2f51511c" class="">
+</p><h3 id="33607640-48ad-4b0c-a01d-22e945a67019" class="">Domains</h3><ul id="64bd422d-28a8-4cbb-b8a5-80ec044402c4" class="bulleted-list"><li style="list-style-type:disc">Content to Commerce and Beyond<ul id="98aef6cc-4cdf-476c-8194-187c0d808ff0" class="bulleted-list"><li style="list-style-type:circle">News, information, “text”</li></ul><ul id="49fce030-2b58-4b98-a67f-265ae5d99d21" class="bulleted-list"><li style="list-style-type:circle">Products, vendors, bundles</li></ul><ul id="1fdd475a-d5f6-4f31-adde-663f1b96d9c3" class="bulleted-list"><li style="list-style-type:circle">Matchmaking (other people)</li></ul><ul id="394350b1-4252-4dc0-85a9-f42c64679479" class="bulleted-list"><li style="list-style-type:circle">Sequences (e.g. music playlists)</li></ul></li></ul><ul id="a2b9a67f-a8ce-4c92-9c34-608889189971" class="bulleted-list"><li style="list-style-type:disc">One particularly interesting property<ul id="0f715adb-9c0a-4389-8a9e-418f4d19c30d" class="bulleted-list"><li style="list-style-type:circle">New item (e.g. movies, books, …)</li></ul><ul id="5d261b4d-599d-4acf-a445-608a2eae8b65" class="bulleted-list"><li style="list-style-type:circle">Re-recommend old ones (e.g. groceries, music)</li></ul></li></ul><p id="621346d9-70ee-4dca-b0bf-2bc565851100" class="">
+</p><h3 id="6e9e2ed3-dbf4-4319-abc3-070adc531eff" class="">Purpose</h3><ul id="e2d599d2-e305-4471-b4c0-cbe63520c881" class="bulleted-list"><li style="list-style-type:disc">The recommendations themselves<ul id="b514d892-3f90-4710-9beb-f8e76c98ad2a" class="bulleted-list"><li style="list-style-type:circle">Sales</li></ul><ul id="6be0c4da-afba-47b9-b54a-89b300f55375" class="bulleted-list"><li style="list-style-type:circle">Information</li></ul></li></ul><ul id="dc8b1ab1-ef53-4aa6-8096-eb21569af83c" class="bulleted-list"><li style="list-style-type:disc">Education of user/customer</li></ul><ul id="75e82292-ca95-43b5-9b85-d5ceb7e722cc" class="bulleted-list"><li style="list-style-type:disc">Build a community if users/customers around products or content</li></ul><p id="9f0fa1f3-f2fd-4b14-be45-4f6f893fc22b" class="">
+</p><h3 id="673cdccb-0219-4935-950e-0bfc87430781" class="">Context</h3><ul id="cb9d2adf-5161-4505-9c13-2197e387e7ee" class="bulleted-list"><li style="list-style-type:disc">What is the User doing at the time of recommendation?<ul id="ac69ce12-6f8c-48ff-a5db-9841298cc6ad" class="bulleted-list"><li style="list-style-type:circle">Shopping</li></ul><ul id="be082940-afb7-42b2-b80d-9c7b82244304" class="bulleted-list"><li style="list-style-type:circle">Listening to Music</li></ul><ul id="453d957d-2610-4f5a-a559-22f499adb5e4" class="bulleted-list"><li style="list-style-type:circle">Hanging out with other people</li></ul></li></ul><ul id="32235531-b019-421d-86b4-f66939b077c1" class="bulleted-list"><li style="list-style-type:disc">How does the context constrain the recommender?<ul id="de4efbe0-0534-4665-8441-de0c9f18ea7a" class="bulleted-list"><li style="list-style-type:circle">Groups, automatic consumption (vs. suggestion), level of attention, level of interruption?</li></ul><p id="325054bd-99be-4e0e-9c52-fab675e4bef1" class="">
+</p></li></ul><h3 id="074db42d-2b67-4130-b755-e598b504845f" class="">Whose Opinion?</h3><ul id="0226cac6-3d91-4e2c-87b9-d2a09f6a7b68" class="bulleted-list"><li style="list-style-type:disc">“Experts”</li></ul><ul id="6657f87e-5cde-4863-ab60-5f794418b0d9" class="bulleted-list"><li style="list-style-type:disc">Ordinary “PHOAKS”<ul id="3b160b09-be64-4884-9784-d170e52f9a49" class="bulleted-list"><li style="list-style-type:circle">People Helping One Another Know Stuff</li></ul></li></ul><ul id="4f939f79-ba93-4ee2-88ab-6959f5a1153e" class="bulleted-list"><li style="list-style-type:disc">People like you</li></ul><p id="3f045b73-2f3f-4c3a-8316-5ec6c9aa26b4" class="">
+</p><h3 id="8e63afa2-bfd9-451a-a121-a0469a353465" class="">Personalization Level</h3><p id="d871d2cf-9e2b-4e37-aad6-97eb2fc343c2" class="">
+</p><ul id="dfd34236-4ede-4c69-be17-5154d412161f" class="bulleted-list"><li style="list-style-type:disc">Generic / Non-Personalized<ul id="4fe70209-770a-4916-8cfd-63b592e9e2a3" class="bulleted-list"><li style="list-style-type:circle">Everyone receives same recommendations</li></ul></li></ul><ul id="938c2e2f-570c-44da-80dd-7764e479b2ee" class="bulleted-list"><li style="list-style-type:disc">Demographic<ul id="340c2dfb-a118-4d73-b8e1-2fac88e9a793" class="bulleted-list"><li style="list-style-type:circle">Matches a target group</li></ul></li></ul><ul id="e845d454-6bc8-407f-94a6-d8c70aaa0350" class="bulleted-list"><li style="list-style-type:disc">Ephemeral<ul id="31196e78-a7a5-4be2-8eea-390130d88bde" class="bulleted-list"><li style="list-style-type:circle">Matches current activity</li></ul></li></ul><ul id="4edb16f5-59eb-45f5-8862-6cfeaae41c56" class="bulleted-list"><li style="list-style-type:disc">Persistent<ul id="dcf88db7-75ec-4a3a-a63c-5bdea46d0dc5" class="bulleted-list"><li style="list-style-type:circle">Matches long-term interest</li></ul></li></ul><p id="c2b4af21-6329-4f0d-8f37-d2abc56b5cab" class="">
+</p><h3 id="904f3939-b604-4c54-8297-04cafcdb4dbb" class="">Privacy and Trustworthiness</h3><p id="801f88da-61c3-43bf-85b4-12fe44701074" class="">
+</p><ul id="1e9a5b45-4c60-4fb3-a052-483abd4b06b6" class="bulleted-list"><li style="list-style-type:disc">Who knows what about me?<ul id="4ad9965e-5038-4de4-9983-40e43376d316" class="bulleted-list"><li style="list-style-type:circle">Personal information revealed</li></ul><ul id="59915565-f700-4265-9908-2ee1d1513b9c" class="bulleted-list"><li style="list-style-type:circle">Identity</li></ul><ul id="c58ab353-c675-47e6-b71a-6a270543068e" class="bulleted-list"><li style="list-style-type:circle">Deniability of preferences</li></ul></li></ul><ul id="2991024d-4d6a-4aed-8ad0-34d5cc73c219" class="bulleted-list"><li style="list-style-type:disc">Is the recommendation honest?<ul id="e7d35b31-d5f7-4937-947d-5520518d7589" class="bulleted-list"><li style="list-style-type:circle">Biases built-in by operator<ul id="5fb8cdc4-93ae-48a5-8fe1-011c95ccf379" class="bulleted-list"><li style="list-style-type:square">“Business rules”</li></ul></li></ul><ul id="68be7d7d-5269-436e-b76f-113aca558c2c" class="bulleted-list"><li style="list-style-type:circle">Vulnerability to external manipulation</li></ul><ul id="7f74baa6-25c5-4318-8fd6-cb7096a0ffc4" class="bulleted-list"><li style="list-style-type:circle">Transparency of “recommenders”; Reputation</li></ul></li></ul><p id="4f382a40-779d-40d1-9cac-6ae86dfce984" class="">
+</p><h3 id="844a2d5f-ba01-4ec9-af78-98562a294568" class="">Interfaces</h3><ul id="bcb2bd4b-dd61-42fa-8708-6b6dbf5f7cd9" class="bulleted-list"><li style="list-style-type:disc">Types of Output<ul id="ebb08e84-4f12-4093-81b9-1af6577c85bb" class="bulleted-list"><li style="list-style-type:circle">Predictions</li></ul><ul id="8ef998bb-5fe7-415a-9e25-8c19a9c4c855" class="bulleted-list"><li style="list-style-type:circle">Recommendations</li></ul><ul id="008855d3-e450-4086-8cfb-48dc98718f6d" class="bulleted-list"><li style="list-style-type:circle">Filtering</li></ul><ul id="237f6562-e769-4db0-a78f-6ba33af2489b" class="bulleted-list"><li style="list-style-type:circle">Organic vs. explicit presentation<ul id="2e2ab9e9-b4aa-4eb4-b56d-4ff8a6b946ef" class="bulleted-list"><li style="list-style-type:square">Agent/Discussion Interface</li></ul></li></ul></li></ul><ul id="4e18828e-3eca-4232-8ceb-053c2a0c97fa" class="bulleted-list"><li style="list-style-type:disc">Types of Input<ul id="c52de310-aea1-432d-bd79-7aff6d4cdbb9" class="bulleted-list"><li style="list-style-type:circle">Explicit</li></ul><ul id="1ef0e042-a1e9-4c60-903a-d1410b2f4254" class="bulleted-list"><li style="list-style-type:circle">Implicit</li></ul><p id="51da58ec-aff7-48dc-88a4-a3a60219cea6" class="">
+</p></li></ul><p id="bceec99a-afda-4153-8215-cc511e43044a" class="">
+</p><h2 id="28ad5952-cbb1-4145-a33c-8247b6f9b0b7" class="">Algorithms</h2><p id="5c2b576e-fad1-470c-88c4-2edb55a6f822" class="">
+</p><h3 id="ed4ae3ab-9f7a-4be1-b152-51712e5c0de2" class="">From the Abstract to the Specific</h3><p id="15ec7592-f77e-4f7f-834c-c6861faceb54" class="">
+</p><ul id="ff56b45d-1adf-4bea-bc70-17b9d3719639" class="bulleted-list"><li style="list-style-type:disc">Basic Model<ul id="2247d545-2463-4e70-9436-1a767220103e" class="bulleted-list"><li style="list-style-type:circle">Users</li></ul><ul id="6c18aadc-b98d-45f7-b9c6-e816a1f984ef" class="bulleted-list"><li style="list-style-type:circle">Items</li></ul><ul id="61bfe533-a8f2-480a-bfad-411bf3f26575" class="bulleted-list"><li style="list-style-type:circle">Ratings</li></ul><ul id="2c28ddda-1ba9-4326-b13c-44749a39f07c" class="bulleted-list"><li style="list-style-type:circle">(Community)</li></ul></li></ul><p id="c43b430f-fca0-4f1e-8270-a445e4cb7f04" class="">
+</p><p id="d775c4c0-da9a-41a1-a290-fa8fa9beb1c8" class="">
+</p><h3 id="ad5813b8-40f0-49d5-b4a3-817d4e05b3ae" class="">Non-Personalized Summary Stats</h3><ul id="b429c7c5-c879-4c36-a1e6-1bd4bea59fc3" class="bulleted-list"><li style="list-style-type:disc">External Community Data<ul id="f4febc9a-9f41-4dd4-ac93-bc15feeae64f" class="bulleted-list"><li style="list-style-type:circle">Best-seller; Most popular; Trending Hot</li></ul></li></ul><ul id="cb3ceec4-f0df-414c-80e3-74c4a55cf18c" class="bulleted-list"><li style="list-style-type:disc">Summary of Community Ratings<ul id="02b32cd4-ef1d-4ed9-a91e-d718e5de2a92" class="bulleted-list"><li style="list-style-type:circle">Best-liked</li></ul></li></ul><p id="fc8d4090-a29f-494f-aab9-f82151414717" class="">
+</p><h3 id="202c9fe1-cb84-437f-8251-c7f2872651fc" class="">Content-Based Filtering</h3><ul id="769d123a-7827-423b-b824-e345a45dcb49" class="bulleted-list"><li style="list-style-type:disc">User Ratings x Item Attributes ⇒ Model</li></ul><ul id="091b7d3c-c347-492e-b8e6-579ce6c844fc" class="bulleted-list"><li style="list-style-type:disc">Model applied to new items via attributes</li></ul><ul id="5e85a3e6-318d-4eef-9794-97b68f97173c" class="bulleted-list"><li style="list-style-type:disc">Alternative: knowledge-based<ul id="d7afedf4-79d6-4016-a776-0ccc1587955d" class="bulleted-list"><li style="list-style-type:circle">Item attributes form model of item space<ul id="7165e803-d5a2-420d-87d4-000480d75299" class="bulleted-list"><li style="list-style-type:square">Users navigate/browse that space</li></ul></li></ul></li></ul><ul id="70a8c7f8-a1af-4fb0-b1a9-ff875a25311d" class="bulleted-list"><li style="list-style-type:disc">Examples<ul id="ce7f00f9-27af-4613-b0e0-3a7e1bf6b3e6" class="bulleted-list"><li style="list-style-type:circle">Personalized news feeds</li></ul><ul id="f40ac75c-ae39-4a21-98f9-6647cf1be04b" class="bulleted-list"><li style="list-style-type:circle">Artist or Genre music feeds</li></ul></li></ul><p id="4cf76431-a3d5-475a-945d-36833b928848" class="">
+</p><h3 id="4807c165-d926-4a55-8363-5009775a19ef" class="">Personalized Collaborative Filtering</h3><ul id="8c3b0290-ae88-469e-b4af-3e1edd03a440" class="bulleted-list"><li style="list-style-type:disc">User opinions of others to predict/recommend</li></ul><ul id="ebd91645-a440-438a-b4c7-a393685a01f8" class="bulleted-list"><li style="list-style-type:disc">User model - set of ratings</li></ul><ul id="07f27910-a41b-4ae6-9e10-c504d559f0b7" class="bulleted-list"><li style="list-style-type:disc">Item model - set of ratings</li></ul><ul id="e5233c57-d9cb-482d-82ab-0735e93e9964" class="bulleted-list"><li style="list-style-type:disc">Common core: sparse matrix of ratings<ul id="fd1206f1-ff67-4979-89a3-967b817c7b53" class="bulleted-list"><li style="list-style-type:circle">Fill in missing values (predict)</li></ul><ul id="c3d541b0-b377-406e-8b7e-aabebe756f2e" class="bulleted-list"><li style="list-style-type:circle">Select promising cells (recommend)</li></ul></li></ul><ul id="e4f4c544-892a-4869-bb43-2990fa2c63bb" class="bulleted-list"><li style="list-style-type:disc">Several different techniques</li></ul><p id="d2e31086-f340-4df9-b270-f84cc17d5814" class="">
+</p><p id="d618af24-fcbd-450a-8310-31fb7fb1eb3a" class="">
+</p><h3 id="0cb3fd44-e9ab-48ae-9098-e5b3e57b486a" class="">Collaborative Filtering Techniques</h3><ul id="352fe020-50d5-4210-a447-35b6f4185f99" class="bulleted-list"><li style="list-style-type:disc">User-user<ul id="8f33cd75-8ba4-4485-9d81-1e76adc50748" class="bulleted-list"><li style="list-style-type:circle">Select neighborhood of similar-taste people<ul id="d39c5078-fe5c-4447-86e3-3362e054d71d" class="bulleted-list"><li style="list-style-type:square">Variant: select people you know/trust</li></ul></li></ul><ul id="9bd07909-24cd-4e43-95a4-fefdb6bc096b" class="bulleted-list"><li style="list-style-type:circle">Use their opinions</li></ul></li></ul><ul id="7830f449-2677-4a2e-b2d6-060694b1b1f5" class="bulleted-list"><li style="list-style-type:disc">Item-item<ul id="3482b32f-070d-4860-b667-9875c4d5cbac" class="bulleted-list"><li style="list-style-type:circle">Pre-compute similarity among items via ratings</li></ul><ul id="813554c3-bc87-4f92-adf4-c45b78eba716" class="bulleted-list"><li style="list-style-type:circle">Use own ratings to triangulate for recommendations</li></ul></li></ul><ul id="5f006a9b-f6d9-481d-aefc-11e1472045f3" class="bulleted-list"><li style="list-style-type:disc">Dimensionality reduction<ul id="b33280f0-36d8-44ee-8809-815eeb876411" class="bulleted-list"><li style="list-style-type:circle">Intuition: taste yields a lower-dimensionality matrix</li></ul><ul id="537d0e69-a958-480a-acaa-00cc24855188" class="bulleted-list"><li style="list-style-type:circle">Compress and use a taste representation</li></ul></li></ul><p id="22b4ad03-2fe1-41c6-810c-44992c416a2d" class="">
+</p></div></article></body></html>

@@ -1,0 +1,691 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Word Embedding</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c986482a-4fb3-417d-bf5b-9f9b6d4909d3" class="page sans"><header><h1 class="page-title">Word Embedding</h1><p class="page-description"></p></header><div class="page-body"><p id="eb2de060-1cf5-4816-be7b-f790d164d327" class="">
+</p><ul id="1ed0fe69-79c6-41fb-94e9-3603dbb16098" class="bulleted-list"><li style="list-style-type:disc">type of word representation that allows words with similar meaning to have similar representation</li></ul><ul id="ff3eca79-e75f-45b3-a221-f767b7d9d94f" class="bulleted-list"><li style="list-style-type:disc">learned representation for text</li></ul><ul id="fca05f18-44db-4405-a4cf-16ee682355db" class="bulleted-list"><li style="list-style-type:disc">class of techniques where individuals words are represented as real-valued vectors in a predefined vector space</li></ul><ul id="13fddd9c-245f-41eb-91fc-026ff740fe7d" class="bulleted-list"><li style="list-style-type:disc">each word is mapped to one vector and the vector values are learned in a way that resembles a neural network</li></ul><ul id="f4d708a4-c0e9-41f2-9e8c-0c830c6f7d2a" class="bulleted-list"><li style="list-style-type:disc">each word represented by real-valued vectors often tens r hundreds of dimensions over thousand or millions by one-hot representation</li></ul><p id="f29cca25-c454-4773-b9a8-e336149d3942" class="">
+</p><h3 id="74797dd1-ce11-440c-86b8-9023991ca46a" class="">1. Embedding Layer</h3><p id="762d4cbd-5476-4e24-acc6-19b52f4f3a1b" class="">
+</p><ul id="f75c1ddb-6431-4a57-8683-04823d4f19a7" class="bulleted-list"><li style="list-style-type:disc">word embedding that is learned jointly with a neural network model on a specific natural language processing task, such as language modeling or document classification</li></ul><ul id="21303db1-614f-441c-b748-2d18a885c1c2" class="bulleted-list"><li style="list-style-type:disc">requires document text to be cleaned and prepared such that each word is one-hot encoded</li></ul><ul id="cb1db9b0-1c95-46d1-ae9a-690406b3538c" class="bulleted-list"><li style="list-style-type:disc">size of vector space is specified </li></ul><ul id="9ce04a0c-53e3-4a1f-8d83-d9f9aaf97f40" class="bulleted-list"><li style="list-style-type:disc">vectors are initialized with small random numbers </li></ul><ul id="8abfd194-b5db-4ee0-9584-4f53448f9af3" class="bulleted-list"><li style="list-style-type:disc">is slow at learning, but will learn embedding both targeted to specific text data and the NLP task</li></ul><p id="70da15ee-4466-4833-aeed-104d58096593" class="">
+</p><h3 id="81639f06-b11e-43c2-9548-9f4df0998fbb" class="">2. Word2Vec</h3><p id="2205beb4-83d5-4d24-b7bb-0f222ef323c8" class="">
+</p><ul id="79b67fe5-77ba-4b60-8c4f-b72dbe052f20" class="bulleted-list"><li style="list-style-type:disc">statistical method for efficiently learning a standalone word embedding from a text corpus</li></ul><p id="db9f9c8e-e7db-4c64-b215-c3fc08467ccd" class="">
+</p><p id="2a380049-ab77-445f-b0ad-479bb1e7a32e" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>CBOW Model</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="9d2869f6-6ff0-4345-be9b-1afe3a39622d" class="bulleted-list"><li style="list-style-type:disc">takes context of each word as the input and tries to predict the word corresponding to the context<figure id="d8d65f8b-0d03-437f-ac9b-8188d5a5f609" class="image"><a href="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled.png"><img style="width:916px" src="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled.png"/></a></figure></li></ul><p id="5fdafddb-5312-4af6-93d0-bb6a1dc4372a" class="">
+</p><p id="168c8367-249b-4a99-b1cd-c203e20e0010" class=""><strong><strong><strong><strong><strong><strong><strong><strong>Skipgram</strong></strong></strong></strong></strong></strong></strong></strong></p><p id="726511c8-dd83-4e08-80c8-f12552f62823" class="">Opposite of CBOW.</p><figure id="762d238f-1374-4686-b03c-1f5e5b49c3a6" class="image"><a href="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%201.png"><img style="width:562px" src="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%201.png"/></a></figure><figure id="c71ff4c5-7a4f-40f1-9f54-c1461a522e5a" class="image"><a href="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%202.png"><img style="width:999px" src="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%202.png"/></a></figure><p id="753604fe-b344-4821-892e-388c3139cdc7" class="">
+</p><figure id="57cbb602-519d-47e0-bb5a-862113c61739" class="image"><a href="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%203.png"><img style="width:820px" src="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%203.png"/></a></figure><ul id="bc5d2f63-7831-47eb-b4e3-f008b5dab2ea" class="bulleted-list"><li style="list-style-type:disc">Take input word</li></ul><ul id="89f1c951-220c-48e8-973a-8f7ace79a2f6" class="bulleted-list"><li style="list-style-type:disc">Predict using untrained model</li></ul><ul id="6f0927a5-e33b-44e9-b46f-fbfd5d13bb12" class="bulleted-list"><li style="list-style-type:disc">Calculate loss</li></ul><ul id="2e2c5b82-b176-4723-8eb1-fd6de86896f9" class="bulleted-list"><li style="list-style-type:disc">Backpropagate the loss</li></ul><p id="da095775-9cf2-4cd5-9c1a-21461f3510f7" class="">
+</p><p id="c7b94d38-f4dc-478a-ad11-d817a2c89287" class="">Projecting to output vocabulary is very computationally expensive because the vocabulary size is in terms of billions and millions.</p><p id="1939176e-74e3-480d-a868-028285376f20" class="">
+</p><p id="cffa78a4-304e-4e1f-b310-51aefad2a534" class="">To solve this, we change task from</p><figure id="20a568e0-b3db-4275-8b63-1c17b7ccb3d4" class="image"><a href="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%204.png"><img style="width:872px" src="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%204.png"/></a></figure><p id="245cd03b-cf48-4941-9486-fd43a3d16747" class="">to</p><figure id="1a066763-50d3-4737-aadc-419edbb8a4bc" class="image"><a href="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%205.png"><img style="width:904px" src="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%205.png"/></a></figure><p id="8c180602-29c5-44eb-b348-39359f1eb74a" class="">
+</p><p id="408ebcf2-492d-4134-be14-9254ae1e37be" class="">For this, we will also need to convert the dataset.</p><figure id="8f627fb5-adea-4104-ade8-1b462831cee8" class="image"><a href="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%206.png"><img style="width:727px" src="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%206.png"/></a></figure><p id="58af4e8c-7872-48ac-878b-aa13e2ea8eee" class="">
+</p><p id="89fa3d08-122b-4a7d-bfd1-48e38bf8912a" class="">But this dataset has only 1 which will make it predict only 1. To solve it, for each input word, we randomly sample values from the vocabulary and assign target of 0. <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Negative Sampling.</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="f74c14c7-5ecc-455e-9294-723863577b20" class="">
+</p><p id="9b412d8b-1ccf-4144-b17d-8aa1034b229c" class=""><strong><strong><strong><strong><strong>Word2Vec Training</strong></strong></strong></strong></strong></p><p id="8587b26a-9618-4831-8826-673ff99b7206" class="">
+</p><p id="6c2f8427-15ec-4961-b50a-30b6a34049c9" class="">Word2Vec has two hyperparameters:</p><ul id="ea68f312-f889-40be-a930-3c6241ceaaca" class="bulleted-list"><li style="list-style-type:disc">vocab_size : Size of the vocabulary</li></ul><ul id="4fffa71a-9765-4b7b-b118-9c577f0dc126" class="bulleted-list"><li style="list-style-type:disc">embedding_size: dimension of vector of each embedding (300 is common)</li></ul><p id="f625f953-01b4-40df-b7f4-b3da73a4ea38" class="">
+</p><p id="1ab50587-adc4-4b35-9258-4ad056d6b8f8" class="">At start of training process, we initialize these two matrices with random values.</p><figure id="3a830d32-1b68-40ca-904f-5d8a17682a21" class="image"><a href="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%207.png"><img style="width:635px" src="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%207.png"/></a></figure><p id="777d3a82-fc06-41cb-a74c-b878b73b80ec" class="">In each training step, we take one positive examples and negative examples associated with it. For positive, we look in the embedding matrix and for negatives, the context matrix.</p><figure id="d73bf825-fe04-4f89-aa83-240ceba50a39" class="image"><a href="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%208.png"><img style="width:968px" src="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%208.png"/></a></figure><p id="52e6db72-a67e-400f-9f6e-96fda438569c" class="">We then calculate the error and backpropagate on respective matrix.</p><figure id="9aa53a77-4d60-4d93-aceb-a7044a319bd4" class="image"><a href="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%209.png"><img style="width:633px" src="Word%20Embedding%20c986482a4fb3417dbf5b9f9b6d4909d3/Untitled%209.png"/></a></figure><p id="1afb745a-1734-4789-8cd0-c42b9f3e977c" class="">After running for multiple epochs, we discard the context matrix and use the embedding matrix.</p></div></article></body></html>

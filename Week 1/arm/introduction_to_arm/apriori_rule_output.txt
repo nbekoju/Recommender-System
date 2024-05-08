@@ -1,0 +1,26 @@
+ ## Apriori Rule Output
+ 
+ RelationRecord(items=frozenset({'i2'}), 
+ support=0.8333333333333334, 
+ ordered_statistics=[
+    OrderedStatistic(items_base=frozenset(), items_add=frozenset({'i2'}), confidence=0.8333333333333334, lift=1.0)
+    ]),
+
+
+ RelationRecord(items=frozenset({'i1', 'i2'}), 
+ support=0.6666666666666666, 
+ ordered_statistics=[
+    OrderedStatistic(items_base=frozenset(), items_add=frozenset({'i1', 'i2'}), confidence=0.6666666666666666, lift=1.0), 
+    OrderedStatistic(items_base=frozenset({'i1'}), items_add=frozenset({'i2'}), confidence=1.0, lift=1.2), 
+    OrderedStatistic(items_base=frozenset({'i2'}), items_add=frozenset({'i1'}), confidence=0.7999999999999999, lift=1.2)
+    ]),
+
+
+RelationRecord(items=frozenset({'i4', 'i5'}), 
+support=0.16666666666666666, 
+ordered_statistics=[
+   OrderedStatistic(items_base=frozenset(), items_add=frozenset({'i4', 'i5'}), confidence=0.16666666666666666, lift=1.0), 
+   OrderedStatistic(items_base=frozenset({'i4'}), items_add=frozenset({'i5'}), confidence=0.25, lift=0.75), 
+   OrderedStatistic(items_base=frozenset({'i5'}), items_add=frozenset({'i4'}), confidence=0.5, lift=0.75)
+   ])
+

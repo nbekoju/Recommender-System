@@ -24,3 +24,24 @@ ordered_statistics=[
    OrderedStatistic(items_base=frozenset({'i5'}), items_add=frozenset({'i4'}), confidence=0.5, lift=0.75)
    ])
 
+RelationRecord(items=frozenset({'i5', 'i3', 'i2', 'i1'}), 
+support=0.16666666666666666, 
+ordered_statistics=[
+   OrderedStatistic(items_base=frozenset(), items_add=frozenset({'i5', 'i3', 'i2', 'i1'}), confidence=0.16666666666666666, lift=1.0), 
+   OrderedStatistic(items_base=frozenset({'i1'}), items_add=frozenset({'i5', 'i3', 'i2'}), confidence=0.25, lift=1.5), 
+   OrderedStatistic(items_base=frozenset({'i2'}), items_add=frozenset({'i5', 'i3', 'i1'}), confidence=0.19999999999999998, lift=1.2), 
+   OrderedStatistic(items_base=frozenset({'i3'}), items_add=frozenset({'i5', 'i1', 'i2'}), confidence=0.25, lift=1.5), 
+   OrderedStatistic(items_base=frozenset({'i5'}), items_add=frozenset({'i3', 'i1', 'i2'}), confidence=0.5, lift=1.0), 
+   OrderedStatistic(items_base=frozenset({'i2', 'i1'}), items_add=frozenset({'i5', 'i3'}), confidence=0.25, lift=1.5), 
+   OrderedStatistic(items_base=frozenset({'i3', 'i1'}), items_add=frozenset({'i5', 'i2'}), confidence=0.3333333333333333, lift=2.0), 
+   OrderedStatistic(items_base=frozenset({'i5', 'i1'}), items_add=frozenset({'i3', 'i2'}), confidence=1.0, lift=1.5), 
+   OrderedStatistic(items_base=frozenset({'i3', 'i2'}), items_add=frozenset({'i5', 'i1'}), confidence=0.25, lift=1.5), 
+   OrderedStatistic(items_base=frozenset({'i5', 'i2'}), items_add=frozenset({'i3', 'i1'}), confidence=1.0, lift=2.0), 
+   OrderedStatistic(items_base=frozenset({'i5', 'i3'}), items_add=frozenset({'i1', 'i2'}), confidence=1.0, lift=1.5), 
+   OrderedStatistic(items_base=frozenset({'i3', 'i2', 'i1'}), items_add=frozenset({'i5'}), confidence=0.3333333333333333, lift=1.0), 
+   OrderedStatistic(items_base=frozenset({'i5', 'i2', 'i1'}), items_add=frozenset({'i3'}), confidence=1.0, lift=1.5), 
+   OrderedStatistic(items_base=frozenset({'i5', 'i3', 'i1'}), items_add=frozenset({'i2'}), confidence=1.0, lift=1.2), 
+   OrderedStatistic(items_base=frozenset({'i5', 'i3', 'i2'}), items_add=frozenset({'i1'}), confidence=1.0, lift=1.5)
+   ])
+
+

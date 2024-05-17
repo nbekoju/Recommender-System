@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/523925303758989995/deb302e74d6943ad98adc7204ce82240/artifacts
+end_time: 1715920595287
+entry_point_name: ''
+experiment_id: '523925303758989995'
+lifecycle_stage: active
+run_id: deb302e74d6943ad98adc7204ce82240
+run_name: bittersweet-sow-745
+run_uuid: deb302e74d6943ad98adc7204ce82240
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1715920593224
+status: 3
+tags: []
+user_id: nirajan

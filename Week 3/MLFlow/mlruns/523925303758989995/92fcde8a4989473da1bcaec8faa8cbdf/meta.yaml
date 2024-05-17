@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/523925303758989995/92fcde8a4989473da1bcaec8faa8cbdf/artifacts
+end_time: 1715920268462
+entry_point_name: ''
+experiment_id: '523925303758989995'
+lifecycle_stage: active
+run_id: 92fcde8a4989473da1bcaec8faa8cbdf
+run_name: overjoyed-whale-825
+run_uuid: 92fcde8a4989473da1bcaec8faa8cbdf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1715920264960
+status: 3
+tags: []
+user_id: nirajan

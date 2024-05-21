@@ -13,3 +13,4 @@ repos:
     rev: 408d4d6
     hooks:
     -   id: flake8
+        exclude: '^Week\ 3/FNFM/.*'

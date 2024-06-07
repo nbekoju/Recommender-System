@@ -125,4 +125,8 @@ This book contains 7 chapters and it explains following things:
 
 - cuDF for faster dataframe operation
 - Data Storage Minimization Techniques for pandas dataframe (H&M Dataset)
--
+
+
+### Other Topics to Learn
+- KL Divergence
+- A/B Testing

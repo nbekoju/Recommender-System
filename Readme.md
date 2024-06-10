@@ -1,7 +1,5 @@
 # Recommendation System - Upskilling
 
-[https://github.com/nbekoju/Recommender-System](https://github.com/nbekoju/Recommender-System)
-
 ## Deliverables
 
 **Week 1: Text Preprocessing steps and ARM on instacart dataset**
@@ -14,7 +12,7 @@
 - [https://github.com/nbekoju/Recommender-System/tree/master/Week 2/Recommender Fast API App](https://github.com/nbekoju/Recommender-System/tree/master/Week%202/Recommender%20Fast%20API%20App)
 - Demo Video in above folder of the repository
 
-**Week 3: Landing page food recommendation**
+**(Meal Rec Dataset)Week 3: Landing page food recommendation**
 
 [https://github.com/nbekoju/Food-Recommendation](https://github.com/nbekoju/Food-Recommendation)
 
@@ -22,13 +20,23 @@
 - training the deepfm model for rating prediction without the text embedding
 - training the deepfm model with text soup embedding
 
+**Week 3: (Food.com) Landing Page Food Recommendation**
+- [https://github.com/nbekoju/Food.com-Landing-Page-Recommendation](https://github.com/nbekoju/Food.com-Landing-Page-Recommendation)
+- Detailed Data analysis, Visualization and Preprocessing
+
+**Week 4: Sequential Food Recommendation**
+- [https://github.com/nbekoju/Sequential-Food-Recommendation](https://github.com/nbekoju/Sequential-Food-Recommendation)
+- [Food.com Recipe & Review Data](https://cseweb.ucsd.edu/~jmcauley/datasets.html#foodcom)
+- Create the atomic files from raw data
+- Train the GRU4Rec model for sequential recommedation
+
 ## Notes
 
-[RecBole](https://www.notion.so/RecBole-0d78672484874a25a4ecee71e3a4bd95?pvs=21)
+- [RecBole](https://www.notion.so/RecBole-0d78672484874a25a4ecee71e3a4bd95?pvs=21)
 
-[Sequential Recommender System: Challenges, Progress and Prospects](https://www.notion.so/Sequential-Recommender-System-Challenges-Progress-and-Prospects-11ffcfbce6634de196e68bc3b063f3b4?pvs=21)
+- [Sequential Recommender System: Challenges, Progress and Prospects](https://www.notion.so/Sequential-Recommender-System-Challenges-Progress-and-Prospects-11ffcfbce6634de196e68bc3b063f3b4?pvs=21)
 
-[Learning to Rank: From Pairwise Approach to Listwise Approach](https://www.notion.so/Learning-to-Rank-From-Pairwise-Approach-to-Listwise-Approach-67f5271917dc4502a09d64d1de681262?pvs=21)
+- [Learning to Rank: From Pairwise Approach to Listwise Approach](https://www.notion.so/Learning-to-Rank-From-Pairwise-Approach-to-Listwise-Approach-67f5271917dc4502a09d64d1de681262?pvs=21)
 
 ## **Hands-On Recommendation Systems with Python**
 

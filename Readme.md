@@ -2,17 +2,17 @@
 
 ## Deliverables
 
-**Week 1: Text Preprocessing steps and ARM on instacart dataset**
+**Sprint 1: Text Preprocessing steps and ARM on instacart dataset**
 
 - [https://github.com/nbekoju/Recommender-System/tree/master/Week 1/arm/instacart](https://github.com/nbekoju/Recommender-System/tree/master/Week%201/arm/instacart)
 - [https://github.com/nbekoju/Recommender-System/tree/master/Week 1/text_preprocessing](https://github.com/nbekoju/Recommender-System/tree/master/Week%201/text_preprocessing)
 
-**Week 2: Containerization of Fast API App for content, collaborative and hybrid recommendation system.**
+**Sprint 2: Containerization of Fast API App for content, collaborative and hybrid recommendation system.**
 
 - [https://github.com/nbekoju/Recommender-System/tree/master/Week 2/Recommender Fast API App](https://github.com/nbekoju/Recommender-System/tree/master/Week%202/Recommender%20Fast%20API%20App)
 - Demo Video in above folder of the repository
 
-**(Meal Rec Dataset)Week 3: Landing page food recommendation**
+**Sprint 3: (Meal Rec Dataset) Landing page food recommendation**
 
 [https://github.com/nbekoju/Food-Recommendation](https://github.com/nbekoju/Food-Recommendation)
 
@@ -20,15 +20,25 @@
 - training the deepfm model for rating prediction without the text embedding
 - training the deepfm model with text soup embedding
 
-**Week 3: (Food.com) Landing Page Food Recommendation**
+**Sprint 3: (Food.com) Landing Page Food Recommendation**
 - [https://github.com/nbekoju/Food.com-Landing-Page-Recommendation](https://github.com/nbekoju/Food.com-Landing-Page-Recommendation)
 - Detailed Data analysis, Visualization and Preprocessing
 
-**Week 4: Sequential Food Recommendation**
+**Sprint 3: Sequential Food Recommendation**
 - [https://github.com/nbekoju/Sequential-Food-Recommendation](https://github.com/nbekoju/Sequential-Food-Recommendation)
 - [Food.com Recipe & Review Data](https://cseweb.ucsd.edu/~jmcauley/datasets.html#foodcom)
 - Create the atomic files from raw data
 - Train the GRU4Rec model for sequential recommedation
+
+**Sprint 4: Anime Recommendation**
+- [https://github.com/nbekoju/Recommender-System/blob/master/Week%205/anime_recommendation/anime_recommendation.ipynb](https://github.com/nbekoju/Recommender-System/blob/master/Week%205/anime_recommendation/anime_recommendation.ipynb)
+
+
+
+**Sprint 4: Fashion Product Recommendation on H&M**
+- [https://github.com/nbekoju/Recommender-System/tree/master/Week%205/H%26M%20Fashion%20Recommender](https://github.com/nbekoju/Recommender-System/tree/master/Week%205/H%26M%20Fashion%20Recommender)
+
+
 
 ## Notes
 

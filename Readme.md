@@ -30,7 +30,7 @@
 - Create the atomic files from raw data
 - Train the GRU4Rec model for sequential recommedation
 
-**Sprint 4: Anime Recommendation**
+**Sprint 4: Anime Recommendation using Learning To Rank**
 - [https://github.com/nbekoju/Recommender-System/blob/master/Week%205/anime_recommendation/anime_recommendation.ipynb](https://github.com/nbekoju/Recommender-System/blob/master/Week%205/anime_recommendation/anime_recommendation.ipynb)
 
 
